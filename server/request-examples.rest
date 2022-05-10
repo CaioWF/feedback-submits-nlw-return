@@ -1,0 +1,17 @@
+# It's necessary install vscode extension REST Client for .rest or .http files
+
+@baseUrl = http://localhost:3333
+@contentType = application/json
+
+###
+POST {{baseUrl}}/feedbacks HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "type": "BUG",
+  "comment": "This is a bug" 
+}
+
+###
+
+###
