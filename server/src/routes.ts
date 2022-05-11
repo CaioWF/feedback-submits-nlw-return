@@ -5,6 +5,10 @@ import { NodemailerMailProvider } from './shared/providers/MailProvider/nodemail
 
 export const routes = express.Router();
 
+routes.get('/health', async (req, res) => {
+  return res.send('ok')
+})
+
 routes.post('/feedbacks', async (req, res) => {
   const { type, comment, screenshot } = req.body;
 
