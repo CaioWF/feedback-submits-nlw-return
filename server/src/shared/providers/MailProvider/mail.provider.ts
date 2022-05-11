@@ -3,6 +3,12 @@ export interface ISendMailData {
   from: string;
   subject: string;
   body: string;
+  attachments?: ISendMailDataAttachment[]
+}
+
+export interface ISendMailDataAttachment {
+  filename: string;
+  content: Buffer | string;
 }
 
 export interface IMailProvider {

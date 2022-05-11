@@ -11,12 +11,13 @@ const transport = nodemailer.createTransport({
 });
 
 export class NodemailerMailProvider implements IMailProvider {
-  async sendMail({ from, to, subject, body }: ISendMailData): Promise<void> {
+  async sendMail({ from, to, subject, body, attachments }: ISendMailData): Promise<void> {
     await transport.sendMail({
       from,
       to,
       subject,
-      html: body
+      html: body,
+      attachments
     });
   }
 }

@@ -29,7 +29,13 @@ export class SubmitFeedbackService {
         `<p>Tipo do feedback: ${type}</p>`,
         `<p>Comentário: ${comment}</p>`,
         `</div>`
-      ].join('\n')
+      ].join('\n'),
+      attachments: [
+        {
+          filename: 'screenshot.png',
+          content: screenshot ? Buffer.from(screenshot.split("base64,")[1], "base64") : ''
+        }
+      ]
     });
 
     return feedback;
