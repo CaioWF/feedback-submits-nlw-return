@@ -17,6 +17,10 @@ export class PrismaFeedbacksRepository implements IFeedbacksRepository, IToEntit
     return this.toEntity(feedback);
   }
 
+  count(): Promise<number> {
+    return prisma.feedback.count();
+  }
+
   toEntity(data: Feedback): IFeedbackEntity {
     return {
       id: data.id,

@@ -13,5 +13,7 @@ Content-Type: {{contentType}}
 }
 
 ###
+GET {{baseUrl}}/feedbacks/count HTTP/1.1
+Content-Type: {{contentType}}
 
 ###

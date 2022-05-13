@@ -8,4 +8,5 @@ export interface ICreateFeedback {
 
 export interface IFeedbacksRepository {
   create(data: ICreateFeedback): Promise<IFeedbackEntity>;
+  count(): Promise<number>;
 }

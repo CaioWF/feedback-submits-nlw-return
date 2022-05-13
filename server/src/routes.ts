@@ -1,22 +1,17 @@
-import express from 'express';
-import { SubmitFeedbackService } from './domain/services/submit-feedback.service';
-import { PrismaFeedbacksRepository } from './infra/repositories/prisma/prisma-feedbacks.repository';
-import { NodemailerMailProvider } from './shared/providers/MailProvider/nodemailer/nodemailer-mail.provider';
+import { Router } from 'express';
+import { CountFeedbackController } from './presentation/controllers/count-feedback.controller';
+import { SubmitFeedbackController } from './presentation/controllers/submit-feedback.controller';
 
-export const routes = express.Router();
+const routes = Router();
+
+const submitFeedbackController = new SubmitFeedbackController();
+const countFeedbackController = new CountFeedbackController();
+
+routes.post('/feedbacks', submitFeedbackController.handle);
+routes.get('/feedbacks/count', countFeedbackController.handle);
 
 routes.get('/health', async (req, res) => {
   return res.status(200)
 })
 
-routes.post('/feedbacks', async (req, res) => {
-  const { type, comment, screenshot } = req.body;
-
-  const feedbacksRepository = new PrismaFeedbacksRepository();
-  const mailProvider = new NodemailerMailProvider();
-  const submitFeedbackService = new SubmitFeedbackService(feedbacksRepository, mailProvider);
-
-  const feedback = await submitFeedbackService.execute({ type, comment, screenshot });
-
-  res.status(201).json(feedback);
-})
+export { routes };

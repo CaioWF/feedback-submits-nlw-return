@@ -4,7 +4,7 @@ const createFeedbackSpy = jest.fn()
 const sendMailSpy = jest.fn()
 
 const submitFeedbackService = new SubmitFeedbackService(
-  { create: createFeedbackSpy },
+  { create: createFeedbackSpy, count: jest.fn() },
   { sendMail: sendMailSpy }
 );
 
@@ -14,6 +14,16 @@ describe('Submit feedback', () => {
       type: 'BUG',
       comment: 'This is a bug',
       screenshot: 'data:image/png;base64,adefAWSDAwdAWDADSfada@DE@322d2',
+    })).resolves.not.toThrow();
+
+    expect(createFeedbackSpy).toHaveBeenCalled();
+    expect(sendMailSpy).toHaveBeenCalled();
+  })
+  
+  it('should be able to submit feedback without screenshot', async () => {
+    await expect(submitFeedbackService.execute({
+      type: 'BUG',
+      comment: 'This is a bug',
     })).resolves.not.toThrow();
 
     expect(createFeedbackSpy).toHaveBeenCalled();

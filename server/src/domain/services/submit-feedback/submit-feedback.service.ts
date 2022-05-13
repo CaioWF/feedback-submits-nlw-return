@@ -1,6 +1,6 @@
-import { IFeedbacksRepository } from "../../infra/repositories/feedbacks.repository";
-import { IMailProvider } from "../../shared/providers/MailProvider/mail.provider";
-import { IFeedbackEntity } from "../entities/feedback.entity";
+import { IFeedbacksRepository } from "../../../infra/repositories/feedbacks.repository";
+import { IMailProvider } from "../../../shared/providers/MailProvider/mail.provider";
+import { IFeedbackEntity } from "../../entities/feedback.entity";
 
 interface SubmitFeedbackServiceRequest {
   type: string;

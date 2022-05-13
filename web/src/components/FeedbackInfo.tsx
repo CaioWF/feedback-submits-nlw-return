@@ -1,13 +1,21 @@
 import { Bug } from "phosphor-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "../lib/api";
+import { socket } from "../lib/ws";
 
 export function FeedbackInfo() {
-  const [countFeedbacks, setCountFeedbacks] = useState(15554)
-  /**
-   * TODO:
-   * Create route to get the count of feedbacks;
-   * Add websocket on backend and frontend to update the count of feedbacks when new feedback is created;
-   */
+  const [countFeedbacks, setCountFeedbacks] = useState(0)
+  
+  useEffect(() => {
+    api.get("/feedbacks/count").then(res => {
+      setCountFeedbacks(res.data.count)
+    })
+  });
+  
+  socket.on('feedback:count', ({count}) => {
+    setCountFeedbacks(count)
+  })
+  
   return (
     <div className=" flex flex-col justify-center items-center h-screen gap-5">
       <Bug weight="bold" className="w-24 h-24 text-brand-500" />
